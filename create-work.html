@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create Work</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        body {
+            background: #f9f9fb;
+        }
+        #create-work {
+            width:92vw;
+            padding:8vh 4vw;
+            font-weight:bold;
+            min-height:100vh;
+        }
+        #create-work h1 {
+            padding:5px 0px;
+            border-bottom:4px solid rgb(255, 44, 90);
+            width:12%;
+            margin-bottom:2vh;
+        }
+        #create-work p {
+            max-width:680px;
+            line-height:1.8;
+            color:#333;
+        }
+        #create-work .panel {
+            display:grid;
+            grid-template-columns:55% 40%;
+            gap:5%;
+            margin-top:4vh;
+        }
+        #create-work form {
+            background:#fff;
+            padding:34px;
+            border-radius:24px;
+            box-shadow:0 25px 60px rgba(0,0,0,0.08);
+        }
+        #create-work form .field {
+            margin-bottom:20px;
+        }
+        #create-work form label {
+            display:block;
+            margin-bottom:10px;
+            color:#555;
+        }
+        #create-work form input,
+        #create-work form textarea {
+            width:100%;
+            padding:14px 16px;
+            border:2px solid rgba(255, 44, 90,0.2);
+            border-radius:14px;
+            background:#fafafb;
+            font-size:16px;
+            color:#111;
+        }
+        #create-work form textarea {
+            resize:vertical;
+            min-height:140px;
+        }
+        #create-work .preview {
+            background:#fff;
+            padding:30px;
+            border-radius:24px;
+            box-shadow:0 25px 60px rgba(0,0,0,0.08);
+            display:flex;
+            flex-direction:column;
+            gap:18px;
+        }
+        #create-work .preview img {
+            width:100%;
+            border-radius:18px;
+            min-height:220px;
+            object-fit:cover;
+        }
+        #create-work .preview h2 {
+            margin:0;
+            font-size:28px;
+            color:#222;
+        }
+        #create-work .preview p {
+            margin:0;
+            color:#555;
+            line-height:1.7;
+        }
+        #create-work .preview a {
+            color:rgb(255, 44, 90);
+            text-decoration:none;
+            font-weight:bold;
+        }
+        @media (max-width: 1000px) {
+            #create-work .panel {
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="animated slideInDown" style="animation-delay:1.8s; background:#fff; color:#000; position:relative;">
+        <table>
+            <tr>
+                <td id="logo">Sajith Surendranathan</td>
+                <td id="navigation">
+                    <a href="index.html">home</a>
+                    <a href="create-work.html">create work</a>
+                    <a href="index.html#work">work</a>
+                    <a href="index.html#bio">about</a>
+                    <a href="index.html#contact">contact</a>
+                </td>
+            </tr>
+        </table>
+    </header>
+    <section id="create-work">
+        <h1>Create Work</h1>
+        <p>Use this page to add a new portfolio project. Enter the title, description, image URL, and link for the new work item. A live preview is shown while you type.</p>
+        <div class="panel">
+            <form id="work-form">
+                <div class="field">
+                    <label for="project-title">Project title</label>
+                    <input id="project-title" type="text" placeholder="Your project title" required>
+                </div>
+                <div class="field">
+                    <label for="project-category">Category</label>
+                    <input id="project-category" type="text" placeholder="Design, Development, Branding">
+                </div>
+                <div class="field">
+                    <label for="project-image">Image URL</label>
+                    <input id="project-image" type="url" placeholder="https://example.com/project-image.jpg">
+                </div>
+                <div class="field">
+                    <label for="project-link">Project link</label>
+                    <input id="project-link" type="url" placeholder="https://example.com/project-page">
+                </div>
+                <div class="field">
+                    <label for="project-description">Description</label>
+                    <textarea id="project-description" placeholder="Write a short description for the new work item." rows="6"></textarea>
+                </div>
+                <button type="submit" class="btn_one">Create Work</button>
+            </form>
+            <div class="preview">
+                <img id="preview-image" src="https://images.unsplash.com/photo-1547922657-b370d1687eb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" alt="Project preview">
+                <div>
+                    <h2 id="preview-title">Project title appears here</h2>
+                    <p id="preview-category">Category</p>
+                    <p id="preview-description">Your project description will live here. Fill in the form to see a live preview.</p>
+                    <a id="preview-link" href="#">View project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function updatePreview() {
+            const title = document.getElementById('project-title').value.trim();
+            const category = document.getElementById('project-category').value.trim();
+            const description = document.getElementById('project-description').value.trim();
+            const imageUrl = document.getElementById('project-image').value.trim();
+            const projectLink = document.getElementById('project-link').value.trim();
+
+            document.getElementById('preview-title').textContent = title || 'Project title appears here';
+            document.getElementById('preview-category').textContent = category || 'Category';
+            document.getElementById('preview-description').textContent = description || 'Your project description will live here. Fill in the form to see a live preview.';
+            document.getElementById('preview-image').src = imageUrl || 'https://images.unsplash.com/photo-1547922657-b370d1687eb1?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80';
+            const previewLink = document.getElementById('preview-link');
+            if (projectLink) {
+                previewLink.href = projectLink;
+                previewLink.textContent = 'View project';
+                previewLink.target = '_blank';
+            } else {
+                previewLink.href = '#';
+                previewLink.textContent = 'Add a project link';
+                previewLink.removeAttribute('target');
+            }
+        }
+
+        document.querySelectorAll('#project-title, #project-category, #project-description, #project-image, #project-link').forEach(element => {
+            element.addEventListener('input', updatePreview);
+        });
+
+        document.getElementById('work-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Work item created! You can now add this project to your portfolio.');
+        });
+    </script>
+</body>
+</html>
